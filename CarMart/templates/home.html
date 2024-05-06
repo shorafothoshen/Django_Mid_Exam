@@ -1,0 +1,54 @@
+{% extends "base.html" %} {% load static %} {% block contain %}
+<header>
+  <div class="d-flex justify-content-center p-5 Header">
+    <div>
+      <h1>Car make, Car Models</h1>
+      <p class="d-flex justify-content-center align-items-center">
+        Introducing the [Car Make] [Car Model], a sleek and stylish vehicle
+        designed to elevate your driving experience. With its striking exterior
+        design and premium craftsmanship, this car commands attention on the
+        road. Under the hood, you'll find a powerful yet efficient engine that
+        delivers responsive performance and impressive fuel efficiency. Whether
+        you're navigating city streets or cruising on the highway, the [Car
+        Make] [Car Model] offers a smooth and exhilarating ride. Step inside the
+        cabin, and you'll discover a world of comfort and convenience. Luxurious
+        materials and thoughtful design elements create an inviting atmosphere,
+        while advanced technology features keep you connected and entertained on
+        every journey. Safety is paramount, and the [Car Make] [Car Model] is
+        equipped with a comprehensive suite of driver-assist systems and
+        cutting-edge safety features to provide peace of mind for you and your
+        passengers. Experience the ultimate driving satisfaction with the [Car
+        Make] [Car Model]. Visit our website to explore our inventory and
+        schedule a test drive today.
+      </p>
+    </div>
+    <div>
+      <img class="headerImage" src="{% static "image/Chevrolet_Trax.jpg" %}"
+      alt="">
+    </div>
+  </div>
+</header>
+<div class="CategoryButton">
+  {% for cat in category %}
+  <a  href="{% url "FilterCategory" cat.slug %}">{{cat.CategoryName}}</a>
+  {% endfor %}
+</div>
+<div class="px-4">
+  <h1>Total Car: {{ Brand | length }}</h1>
+</div>
+<div class="col-12">
+  <div class="d-flex flex-lg-wrap g-5 justify-content-center">
+    {% for car in Brand %}
+  <div class="card m-3" style="width: 18rem;">
+    <img src="{{car.image.url}}" class="card-img-top" alt="Car Photo">
+    <div class="card-body">
+      <h4 class="card-title">Model: {{car.name}}</h4>
+      <h4 class="card-title">Price: ${{car.price}}</h4>
+      <h4 class="card-title">Brand: {{car.brand.CategoryName}}</h4>
+      <a href="{% url "carDetails" slug=car.slug %}" class="btn btn-primary">Details</a>
+    </div>
+  </div>
+  {% endfor %}
+  </div>
+</div>
+{% endblock contain %}
